@@ -29,7 +29,6 @@ class HomeFragment : Fragment() {
            // startActivity(root2)
 
         }*/
-        //FINIR L'IMPLEMENTATION DU BOUTTON DECONNEXION PUTAIN
         //val textView: TextView = root.findViewById(R.id.text_home)
         //homeViewModel.text.observe(viewLifecycleOwner, Observer {
         //    textView.text = it

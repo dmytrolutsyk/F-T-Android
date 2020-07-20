@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("Username", Usernamecpt)
             intent.putExtra("Password", Passwordcpt)
 
-            val text = "Please enter all fields!"
+            val text = "Veuillez renseigner tous les champs"
             val duration = Toast.LENGTH_SHORT
             val toast = Toast.makeText(applicationContext, text, duration)
             if (Usernamecpt == "" || Passwordcpt == ""){
@@ -39,13 +39,13 @@ class MainActivity : AppCompatActivity() {
                     .enqueue(object: retrofit2.Callback<Weapon> {
                         override fun onFailure(call: Call<Weapon>, t: Throwable) {
                             Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
-                            Toast.makeText(applicationContext,"zebi marche pas", duration).show()
+                            Toast.makeText(applicationContext,"", duration).show()
                         }
 
                         override fun onResponse(call: Call<Weapon>, response: Response<Weapon>) {
                             Toast.makeText(applicationContext, response.body()?.message, Toast.LENGTH_LONG).show()
                             Log.i("", "post status to API" + response.body()!!.message)
-                            Toast.makeText(applicationContext,"yallah", duration).show()
+                            Toast.makeText(applicationContext,"", duration).show()
                         }
 
                     })*/

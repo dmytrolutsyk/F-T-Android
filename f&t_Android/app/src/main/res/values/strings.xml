@@ -12,7 +12,15 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_new_ad">Nouvelle Annonce</string>
     <string name="title_account">Account</string>
-    <string name="deconnexion">Deconnexion</string>
+    <string name="deconnexion">Déconnexion</string>
+    <string name="type_d_utilisateur">Type d\'Utilisateur</string>
+    <string name="informations_utilisateur">Informations Utilisateur</string>
+    <string name="t_l_phone">Téléphone</string>
+    <string name="mot_de_passe">Mot de Passe</string>
+    <string name="nom_d_utilisateur">Nom d\'Utilisateur</string>
+    <string name="ville">Ville</string>
+    <string name="mettre_jour">Mettre à Jour</string>
+    <string name="email">Email</string>
     <string-array name="Type">
         <item>Don</item>
         <item>Echange</item>
