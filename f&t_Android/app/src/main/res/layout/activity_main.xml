@@ -62,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:hint="Nom d'Utilisateur"
+            android:hint="Nom d'utilisateur"
             android:inputType="text"
             android:textColorHint="#18450B" />
 
@@ -71,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:hint="Mot de Passe"
+            android:hint="Mot de passe"
             android:inputType="textPassword"
             android:textColorHint="#18450B" />
 
