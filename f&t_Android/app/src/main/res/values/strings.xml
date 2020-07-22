@@ -21,6 +21,8 @@
     <string name="ville">Ville</string>
     <string name="mettre_jour">Mettre à Jour</string>
     <string name="email">Email</string>
+    <string name="titre">Titre</string>
+    <string name="categorie">Categorie</string>
     <string-array name="Type">
         <item>Don</item>
         <item>Echange</item>
