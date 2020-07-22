@@ -4,10 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ft_android.Annonce
 import com.example.ft_android.R
-import com.example.ft_android.ui.home.HomeFragment
-import kotlinx.android.synthetic.main.list_item.*
 
 class AnnonceViewModel (inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.list_item, parent, false)) {

@@ -1,17 +1,33 @@
 package com.example.ft_android.ui.new_ad
 
+import ApiInterface
+import PutAnnonce
+import PutAnnonceResult
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.example.ft_android.BottomNavigationActivity
 import com.example.ft_android.R
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class NewAdFragment : Fragment() {
-
     private lateinit var NewadViewModel: AdViewModel
+    private lateinit var title: TextView
+    private lateinit var description: TextView
+    private lateinit var category: TextView
+    private lateinit var photos: TextView
+    private lateinit var type: TextView
+    lateinit var putannonce_button: Button
+    private var token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWIwM2IxZGIzNWJkMzcxYmM2NDQxN2IiLCJ1c2VybmFtZSI6ImJlcm5hcmQiLCJwYXNzd29yZCI6IiQyYiQwNSQ1NXk4WmNtVDJobVNpSFpuSFNxelguM2kyZTRlYjVWS3RNUHd4aWpwZlo2RjJjQXkzUTJHMiIsImlhdCI6MTU5NTQ0ODc5MCwiZXhwIjoxNTk1NTM1MTkwfQ.lhOUcbGWmzTtfq7dxTB34bgQMeKUdvxCDjqrdQrHdFM"
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +47,59 @@ class NewAdFragment : Fragment() {
         //NewadViewModel.text.observe(viewLifecycleOwner, Observer {
         //    textView.text = it
         //})
+        //this.TextView =  root!!.findViewById(R.id.textView7)
+        //this.TextView.text = "salut"
+        //this.token = arguments!!.getString("token").toString()
+        this.title = root!!.findViewById(R.id.editText3)
+        var nom_objet = this.title.text
+
+        this.description = root!!.findViewById(R.id.editText2)
+        var descriptionon = this.description.text
+
+        this.category = root!!.findViewById(R.id.editText5)
+        var categorie = this.category.text
+
+        this.photos = root!!.findViewById(R.id.editText6)
+        var photo = this.photos.text
+
+        this.type = root!!.findViewById(R.id.editText4)
+        var typeobj = this.type.text
+
+        this.putannonce_button = root!!.findViewById(R.id.button2)
+        this.putannonce_button.setOnClickListener {
+            putannonce(nom_objet as String, descriptionon as String,
+                categorie as String, photo as String, typeobj as String
+            )
+        }
         return root
     }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+    }
+
+
+    private fun putannonce(nom_objet: String, descriptionon: String, categorie: String, photo: String, typeobj: String){
+        val retIn = RetrofitInstance.getRetrofitInstance().create(ApiInterface::class.java)
+        val putad = PutAnnonce(nom_objet , descriptionon, categorie, photo, typeobj)
+        retIn.putannonce(this.token, putad).enqueue(object : Callback<PutAnnonceResult> {
+            override fun onFailure(call: Call<PutAnnonceResult>, t: Throwable) {
+                println(t.message)
+                Toast.makeText(view!!.context, "Error: Voir les logs!!!", Toast.LENGTH_SHORT).show()
+            }
+            override fun onResponse(call: Call<PutAnnonceResult>, response: Response<PutAnnonceResult>) {
+                if (response.code() == 200) {
+                    val result: PutAnnonceResult = response.body()!!
+                    Toast.makeText(view!!.context, "Connexion réussie !!"+result.annonce, Toast.LENGTH_SHORT).show()
+                    val intent = Intent(view!!.context, BottomNavigationActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(view!!.context, "Connexion échoué!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+    }
+
+
 }

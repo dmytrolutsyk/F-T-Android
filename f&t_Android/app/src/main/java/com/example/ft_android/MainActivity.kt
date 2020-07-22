@@ -1,5 +1,9 @@
 package com.example.ft_android
 
+import ApiInterface
+import SignInBody
+import SignInResult
+import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -7,6 +11,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.ft_android.ui.home.HomeFragment
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,23 +44,30 @@ class MainActivity : AppCompatActivity() {
                 toast.show()
             }
             else {
-                /*NetworkProvider.weaponApi.WeaponDTO(Usernamecpt, Passwordcpt)
-                    .enqueue(object: retrofit2.Callback<Weapon> {
-                        override fun onFailure(call: Call<Weapon>, t: Throwable) {
-                            Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
-                            Toast.makeText(applicationContext,"", duration).show()
-                        }
-
-                        override fun onResponse(call: Call<Weapon>, response: Response<Weapon>) {
-                            Toast.makeText(applicationContext, response.body()?.message, Toast.LENGTH_LONG).show()
-                            Log.i("", "post status to API" + response.body()!!.message)
-                            Toast.makeText(applicationContext,"", duration).show()
-                        }
-
-                    })*/
-                startActivity(intent)
+                signin(Usernamecpt, Passwordcpt)
             }
         }
+    }
+    private fun signin(username: String, password: String){
+        val retIn = RetrofitInstance.getRetrofitInstance().create(ApiInterface::class.java)
+        val signIn = SignInBody(username , password)
+        retIn.signin(signIn).enqueue(object : Callback<SignInResult> {
+            override fun onFailure(call: Call<SignInResult>, t: Throwable) {
+                println(t.message)
+                Toast.makeText(applicationContext, "Error: Voir les logs!!!", Toast.LENGTH_SHORT).show()
+            }
+            override fun onResponse(call: Call<SignInResult>, response: Response<SignInResult>) {
+                if (response.code() == 200) {
+                    val result: SignInResult = response.body()!!
+                    Toast.makeText(applicationContext, "Connexion réussie !!"+result.token, Toast.LENGTH_SHORT).show()
+                    val intent = Intent(applicationContext, BottomNavigationActivity::class.java)
+                    intent.putExtra("token", result.token)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(applicationContext, "Connexion échoué!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
     }
 }
 
