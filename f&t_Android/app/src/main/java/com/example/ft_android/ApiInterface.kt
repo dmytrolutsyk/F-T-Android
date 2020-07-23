@@ -19,8 +19,8 @@ interface ApiInterface {
 }
 class RetrofitInstance {
     companion object {
-        val BASE_URL: String = "https://findandtrade.herokuapp.com/"
-        //val BASE_URL: String = "http://localhost:3000/"
+        //val BASE_URL: String = "https://findandtrade.herokuapp.com/"
+        val BASE_URL: String = "http://192.168.4.29:3000/"
 
         val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
             this.level = HttpLoggingInterceptor.Level.BODY

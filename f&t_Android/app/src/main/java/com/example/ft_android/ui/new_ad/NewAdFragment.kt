@@ -50,25 +50,36 @@ class NewAdFragment : Fragment() {
         //this.TextView =  root!!.findViewById(R.id.textView7)
         //this.TextView.text = "salut"
         //this.token = arguments!!.getString("token").toString()
-        this.title = root!!.findViewById(R.id.editText3)
-        var nom_objet = this.title.text
 
-        this.description = root!!.findViewById(R.id.editText2)
-        var descriptionon = this.description.text
 
-        this.category = root!!.findViewById(R.id.editText5)
-        var categorie = this.category.text
+        //var title: String = "velo"
 
-        this.photos = root!!.findViewById(R.id.editText6)
-        var photo = this.photos.text
 
-        this.type = root!!.findViewById(R.id.editText4)
-        var typeobj = this.type.text
 
         this.putannonce_button = root!!.findViewById(R.id.button2)
         this.putannonce_button.setOnClickListener {
-            putannonce(nom_objet as String, descriptionon as String,
-                categorie as String, photo as String, typeobj as String
+            this.title = root!!.findViewById(R.id.editText3)
+            var title: String = this.title.text.toString()
+
+            this.description = root!!.findViewById(R.id.editText2)
+            var description: String = this.description.text.toString()
+            //var description: String = "il est rouillé"
+
+            this.category = root!!.findViewById(R.id.editText5)
+            var category: String = this.category.text.toString()
+            //var category: String = "sport"
+
+
+            this.photos = root!!.findViewById(R.id.editText6)
+            var photos: String = this.photos.text.toString()
+            //var photos: String = "blablou"
+
+            this.type = root!!.findViewById(R.id.editText4)
+            var typeobj: String = this.type.text.toString()
+            //var typeobj: String = "don"
+            println("ici "+title)
+            putannonce(title, description,
+                category, photos, typeobj
             )
         }
         return root
