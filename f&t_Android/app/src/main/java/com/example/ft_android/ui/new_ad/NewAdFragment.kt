@@ -25,7 +25,7 @@ class NewAdFragment : Fragment() {
     private lateinit var photos: TextView
     private lateinit var type: TextView
     lateinit var putannonce_button: Button
-    private var token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWIwM2IxZGIzNWJkMzcxYmM2NDQxN2IiLCJ1c2VybmFtZSI6ImJlcm5hcmQiLCJwYXNzd29yZCI6IiQyYiQwNSQ1NXk4WmNtVDJobVNpSFpuSFNxelguM2kyZTRlYjVWS3RNUHd4aWpwZlo2RjJjQXkzUTJHMiIsImlhdCI6MTU5NTQ0ODc5MCwiZXhwIjoxNTk1NTM1MTkwfQ.lhOUcbGWmzTtfq7dxTB34bgQMeKUdvxCDjqrdQrHdFM"
+    private var token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWNjNzI1MzdiODA4MzAwMTdjY2M4OTQiLCJ1c2VybmFtZSI6ImlwYWQiLCJwYXNzd29yZCI6IiQyYiQwNSQ4emFKUTJDbzFtNFRoR3MwZDRxTWN1YnI2bk9zYkpzYXk4QXFmZUllS1FNSGdMNjhHTHlZaSIsImlhdCI6MTU5ODQ3NDk1MSwiZXhwIjoxNTk4NTYxMzUxfQ.lwFqu3D_7YTKyemjBOQ1uZOPGfhGoc60aPlxFaJ57vE"
 
 
 
@@ -65,16 +65,16 @@ class NewAdFragment : Fragment() {
             var description: String = this.description.text.toString()
             //var description: String = "il est rouillé"
 
-            this.category = root!!.findViewById(R.id.editText5)
+            this.category = root!!.findViewById(R.id.editText6)
             var category: String = this.category.text.toString()
             //var category: String = "sport"
 
 
-            this.photos = root!!.findViewById(R.id.editText6)
+            this.photos = root!!.findViewById(R.id.editText4)
             var photos: String = this.photos.text.toString()
             //var photos: String = "blablou"
 
-            this.type = root!!.findViewById(R.id.editText4)
+            this.type = root!!.findViewById(R.id.editText5)
             var typeobj: String = this.type.text.toString()
             //var typeobj: String = "don"
             println("ici "+title)

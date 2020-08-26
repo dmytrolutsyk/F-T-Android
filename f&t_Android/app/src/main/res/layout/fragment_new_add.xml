@@ -11,7 +11,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Creez votre annonce:"
+        android:text="Publier une Annonce:"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,11 +23,12 @@
         android:id="@+id/editText3"
         android:layout_width="411dp"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/textView6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5"
-        tools:ignore="MissingConstraints"></EditText>
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView6"
@@ -55,17 +56,18 @@
         android:id="@+id/editText5"
         android:layout_width="411dp"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8"
-        tools:ignore="MissingConstraints"></EditText>
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="98dp"
         android:layout_height="14dp"
-        android:text="Type d'annonce"
+        android:text="Type d'Annonce"
         app:layout_constraintBottom_toTopOf="@+id/editText4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,27 +78,29 @@
         android:id="@+id/editText2"
         android:layout_width="411dp"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
-        tools:ignore="MissingConstraints"></EditText>
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/editText4"
         android:layout_width="411dp"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/textView7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:ignore="MissingConstraints"></EditText>
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nom du produit:"
+        android:text="Titre:"
         app:layout_constraintBottom_toTopOf="@+id/editText3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -119,7 +123,7 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="URL photo"
+        android:text="Photo"
         app:layout_constraintBottom_toTopOf="@+id/editText5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -129,10 +133,11 @@
         android:id="@+id/editText6"
         android:layout_width="411dp"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/textView8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7"
-        tools:ignore="MissingConstraints"></EditText>
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
