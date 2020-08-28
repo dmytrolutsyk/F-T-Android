@@ -24,7 +24,17 @@
     <string name="titre">Titre</string>
     <string name="categorie">Categorie</string>
     <string-array name="Type">
-        <item>Don</item>
-        <item>Echange</item>
+        <item>Animaux</item>
+        <item>Bricolage</item>
+        <item>Electroménager</item>
+        <item>Informatique</item>
+        <item>Instruments de Musique</item>
+        <item>Jardinage</item>
+        <item>Jeux &amp; Jouets</item>
+        <item>Mobilier</item>
+        <item>Multimédia</item>
+        <item>Sport</item>
+        <item>Véhicules</item>
+        <item>Vêtements</item>
     </string-array>
 </resources>
