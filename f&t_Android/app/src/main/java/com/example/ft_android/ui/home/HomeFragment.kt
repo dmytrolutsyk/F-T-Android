@@ -1,23 +1,26 @@
 package com.example.ft_android.ui.home
 
+import ApiInterface
+import GetAnnoncesResult
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
+import com.example.ft_android.BottomNavigationActivity
 import com.example.ft_android.R
 import kotlinx.android.synthetic.main.fragment_home.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class HomeFragment : Fragment() {
-
-    private lateinit var homeViewModel: HomeViewModel
-
-    data class Annonces(val titre: String, val categorie: String, val type: String, val description: String, val urlImage: String)
-    private val annonces = listOf(
+class HomeFragment(
+    private val annonces: List<Annonces> = listOf(
         Annonces("Ballon", "Echange", "Sport","Ce ballon est beau", "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcThLDbpIIRq0wMmyGsY_DD12fDtdWOKdYHebQ&usqp=CAU"),
         Annonces("Roue", "Don", "Sport", "Ce ballon est beau", "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcThLDbpIIRq0wMmyGsY_DD12fDtdWOKdYHebQ&usqp=CAU"),
         Annonces("Ordinateur", "Echange", "Sport", "Ce ballon est beau", "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcThLDbpIIRq0wMmyGsY_DD12fDtdWOKdYHebQ&usqp=CAU"),
@@ -28,6 +31,18 @@ class HomeFragment : Fragment() {
         Annonces("Ecran tv", "Echange", "Sport", "Ce ballon est beau", "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcThLDbpIIRq0wMmyGsY_DD12fDtdWOKdYHebQ&usqp=CAU"),
         Annonces("Ecran tv", "Echange", "Sport", "Ce ballon est beau", "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcThLDbpIIRq0wMmyGsY_DD12fDtdWOKdYHebQ&usqp=CAU")
     )
+    //private val annonces: ArrayList<Annonces>? = null
+    //private var annonces: List<Annonces> = emptyList(1)
+    //var annoncesTest = listOf<Annonces>()
+    //var myList: MutableList<Annonces> = mutableListOf<Annonces>()
+) : Fragment() {
+
+    private lateinit var homeViewModel: HomeViewModel
+    private var token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWNjNzI1MzdiODA4MzAwMTdjY2M4OTQiLCJ1c2VybmFtZSI6ImlwYWQiLCJwYXNzd29yZCI6IiQyYiQwNSQ4emFKUTJDbzFtNFRoR3MwZDRxTWN1YnI2bk9zYkpzYXk4QXFmZUllS1FNSGdMNjhHTHlZaSIsImlhdCI6MTU5ODQ3NDk1MSwiZXhwIjoxNTk4NTYxMzUxfQ.lwFqu3D_7YTKyemjBOQ1uZOPGfhGoc60aPlxFaJ57vE"
+
+
+    data class Annonces(var titre: String, var categorie: String, var type: String, var description: String, var urlImage: String)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +69,7 @@ class HomeFragment : Fragment() {
         //homeViewModel.text.observe(viewLifecycleOwner, Observer {
         //    textView.text = it
         //})
+        getannonces()
         return root
     }
 
@@ -67,9 +83,48 @@ class HomeFragment : Fragment() {
             // set the custom adapter to the RecyclerView
             adapter = ListAdapter(annonces)
         }
+
     }
 
     companion object {
         fun newInstance(): HomeFragment = HomeFragment()
     }
+
+    private fun getannonces(){
+        val retIn = RetrofitInstance.getRetrofitInstance().create(ApiInterface::class.java)
+        retIn.getannonces(this.token).enqueue(object : Callback<GetAnnoncesResult> {
+            override fun onFailure(call: Call<GetAnnoncesResult>, t: Throwable) {
+                println(t.message)
+                Toast.makeText(view!!.context, "Error: Voir les logs!!!", Toast.LENGTH_SHORT).show()
+            }
+            override fun onResponse(call: Call<GetAnnoncesResult>, response: Response<GetAnnoncesResult>) {
+                if (response.code() == 200) {
+                    val result: GetAnnoncesResult = response.body()!!
+                    Toast.makeText(view!!.context, "Connexion réussie !!"+result.annonces[0].title, Toast.LENGTH_SHORT).show()
+                    println(result.annonces)
+                    //val indice = 1
+                    result.annonces.forEach {
+
+                        //val annonce1 = Annonces(it.title, it.category, it.type, it.description, it.photos)
+                       /* annoncesTest.elementAt(indice).titre = it.title
+                        annoncesTest.elementAt(indice).categorie = it.category
+                        annoncesTest.elementAt(indice).type = it.type
+                        annoncesTest.elementAt(indice).description = it.description
+                        annoncesTest.elementAt(indice).urlImage = it.photos*/
+                        //myList.add(annonce1)
+                    }
+                    list_recycler_view.apply {
+                        // set a LinearLayoutManager to handle Android
+                        // RecyclerView behavior
+                        layoutManager = LinearLayoutManager(activity)
+                        // set the custom adapter to the RecyclerView
+                        //adapter = ListAdapter(myList)
+                    }
+                } else {
+                    Toast.makeText(view!!.context, "Connexion échoué!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+    }
+
 }

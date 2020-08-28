@@ -1,6 +1,5 @@
 import com.example.ft_android.Annonce
 import okhttp3.OkHttpClient
-import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -14,6 +13,10 @@ interface ApiInterface {
     @Headers("Content-Type:application/json")
     @PUT("annonces")
     fun putannonce(@Header("x-access-token") token: String, @Body info: PutAnnonce): retrofit2.Call<PutAnnonceResult>
+    //
+    @Headers("Content-Type:application/json")
+    @GET("annonces/all")
+    fun getannonces(@Header("x-access-token") token: String): retrofit2.Call<GetAnnoncesResult>
 
 
 }
@@ -45,6 +48,8 @@ data class SignInBody(val username: String, val password: String)
 data class SignInResult(val error: String, val UserId: String, val token: String)
 data class PutAnnonce(val title: String, val description: String, val category: String, val type: String, val photos: String)
 data class PutAnnonceResult(val error: String, val annonce: Annonce)
+data class GetAnnonces(val _id: String, val userID: String, val title: String, val category: String, val description: String, val type: String, val photos: String, val createdAt: String, val lastUpdatedAt: String)
+data class GetAnnoncesResult(val error: String, val annonces : Array<GetAnnonces> )
 
 
 
