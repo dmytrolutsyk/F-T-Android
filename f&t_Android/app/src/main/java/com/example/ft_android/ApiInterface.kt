@@ -1,9 +1,11 @@
 import com.example.ft_android.Annonce
+import com.example.ft_android.User
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
+import java.util.concurrent.TimeUnit
 
 interface ApiInterface {
     @Headers("Content-Type:application/json")
@@ -13,17 +15,20 @@ interface ApiInterface {
     @Headers("Content-Type:application/json")
     @PUT("annonces")
     fun putannonce(@Header("x-access-token") token: String, @Body info: PutAnnonce): retrofit2.Call<PutAnnonceResult>
-    //
+
     @Headers("Content-Type:application/json")
     @GET("annonces/all")
     fun getannonces(@Header("x-access-token") token: String): retrofit2.Call<GetAnnoncesResult>
 
+    @Headers("Content-Type:application/json")
+    @PATCH("/users/:id")
+    fun patchuser(@Header("x-access-token") token: String, @Body info: PatchUser): retrofit2.Call<PatchUserResult>
 
 }
 class RetrofitInstance {
     companion object {
-        val BASE_URL: String = "https://findandtrade.herokuapp.com/"
-        //val BASE_URL: String = "http://192.168.4.29:3000/"
+        //val BASE_URL: String = "https://findandtrade.herokuapp.com/"
+        val BASE_URL: String = "http://192.168.4.30:3000/"
 
         val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
             this.level = HttpLoggingInterceptor.Level.BODY
@@ -31,6 +36,9 @@ class RetrofitInstance {
 
         val client: OkHttpClient = OkHttpClient.Builder().apply {
             this.addInterceptor(interceptor)
+            this.connectTimeout(30, TimeUnit.SECONDS)
+            this.writeTimeout(30, TimeUnit.SECONDS)
+            this.readTimeout(30, TimeUnit.SECONDS)
         }.build()
         fun getRetrofitInstance(): Retrofit {
             val builder = Retrofit.Builder()
@@ -50,6 +58,8 @@ data class PutAnnonce(val title: String, val description: String, val category: 
 data class PutAnnonceResult(val error: String, val annonce: Annonce)
 data class GetAnnonces(val _id: String, val userID: String, val title: String, val category: String, val description: String, val type: String, val photos: String, val createdAt: String, val lastUpdatedAt: String)
 data class GetAnnoncesResult(val error: String, val annonces : Array<GetAnnonces> )
+data class PatchUser (val username: String, val password: String, val ville: String, val email: String, val status_user: String, val phone: String)
+data class PatchUserResult(val error: String, val user: User)
 
 
 
