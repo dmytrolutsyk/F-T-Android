@@ -33,7 +33,7 @@ class Annonce {
     @SerializedName("username")
     public var username: String? = null
 
-    constructor(userID: String, title: String, description: String, category: String, type: String, photos: String, createdAt: String, lastUpdatedAt: String, _id: String, username: String){
+    constructor(userID: String?, title: String?, description: String?, category: String?, type: String?, photos: String?, createdAt: String?, _id: String?, username: String?){
         this.userID = userID
         this.title = title
         this.description = description

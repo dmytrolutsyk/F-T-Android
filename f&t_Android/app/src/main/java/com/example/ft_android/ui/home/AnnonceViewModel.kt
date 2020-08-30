@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ft_android.Annonce
 import com.example.ft_android.R
 
 class AnnonceViewModel (inflater: LayoutInflater, parent: ViewGroup) :
@@ -17,13 +18,13 @@ class AnnonceViewModel (inflater: LayoutInflater, parent: ViewGroup) :
         mYearView = itemView.findViewById(R.id.list_categorie)
     }
 
-    fun bind(annonces: HomeFragment.Annonces) {
-        mTitleView?.text = annonces.titre
-        mYearView?.text = annonces.categorie
+    fun bind(annonces: Annonce) {
+        mTitleView?.text = annonces.title
+        mYearView?.text = annonces.category
     }
 }
 
-class ListAdapter(private val list: List<HomeFragment.Annonces>)
+class ListAdapter(private val list: ArrayList<Annonce>)
     : RecyclerView.Adapter<AnnonceViewModel>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnnonceViewModel {
@@ -32,7 +33,7 @@ class ListAdapter(private val list: List<HomeFragment.Annonces>)
     }
 
     override fun onBindViewHolder(holder: AnnonceViewModel, position: Int) {
-        val annonces: HomeFragment.Annonces = list[position]
+        val annonces: Annonce = list.elementAt(position)
         holder.bind(annonces)
     }
 
