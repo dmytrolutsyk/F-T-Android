@@ -24,13 +24,16 @@ class Annonce {
     @SerializedName("createdAt")
     public var createdAt: String? = null
 
-    @SerializedName("lastUpdatedAt")
-    public var lastUpdatedAt: String? = null
+    //@SerializedName("lastUpdatedAt")
+    //public var lastUpdatedAt: String? = null
 
     @SerializedName("_id")
     public var _id: String? = null
 
-    constructor(userID: String, title: String, description: String, category: String, type: String, photos: String, createdAt: String, lastUpdatedAt: String, _id: String){
+    @SerializedName("username")
+    public var username: String? = null
+
+    constructor(userID: String, title: String, description: String, category: String, type: String, photos: String, createdAt: String, lastUpdatedAt: String, _id: String, username: String){
         this.userID = userID
         this.title = title
         this.description = description
@@ -38,11 +41,14 @@ class Annonce {
         this.type = type
         this.photos = photos
         this.createdAt = createdAt
-        this.lastUpdatedAt = lastUpdatedAt
+        //this.lastUpdatedAt = lastUpdatedAt
         this._id = _id
+        this.username = username
     }
 
-
+    override fun toString(): String {
+        return "Annonce(userID=$userID, title=$title, description=$description, category=$category, type=$type, photos=$photos, createdAt=$createdAt, _id=$_id, username=$username)"
+    }
 
 
 }

@@ -12,12 +12,18 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ft_android.Annonce
 import com.example.ft_android.BottomNavigationActivity
 import com.example.ft_android.R
 import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.util.*
+import kotlin.collections.ArrayList
+
 
 class HomeFragment(
     private val annonces: List<Annonces> = listOf(
@@ -38,7 +44,7 @@ class HomeFragment(
 ) : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
-    private var token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWNjNzI1MzdiODA4MzAwMTdjY2M4OTQiLCJ1c2VybmFtZSI6ImlwYWQiLCJwYXNzd29yZCI6IiQyYiQwNSQ4emFKUTJDbzFtNFRoR3MwZDRxTWN1YnI2bk9zYkpzYXk4QXFmZUllS1FNSGdMNjhHTHlZaSIsImlhdCI6MTU5ODQ3NDk1MSwiZXhwIjoxNTk4NTYxMzUxfQ.lwFqu3D_7YTKyemjBOQ1uZOPGfhGoc60aPlxFaJ57vE"
+    private var token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjRhOTY1MDk5MDY0OTAwMTdjZWM4NDUiLCJ1c2VybmFtZSI6ImRteXRybyIsInBhc3N3b3JkIjoiJDJiJDA1JEZGT0RxOHJYeFg2Mk1ETmo4TmVuRE9SWlBpVm01Sk5BTlpwRjVFMmZrUHhkUUdCa1gySGRtIiwiaWF0IjoxNTk4ODE4NzExLCJleHAiOjE1OTg5MDUxMTF9.VKzxSI6kgkoZzGW5Q7F8r3_91OsZy0w6rnVF5Kr9N78"
 
 
     data class Annonces(var titre: String, var categorie: String, var type: String, var description: String, var urlImage: String)
@@ -101,9 +107,15 @@ class HomeFragment(
                 if (response.code() == 200) {
                     val result: GetAnnoncesResult = response.body()!!
                     Toast.makeText(view!!.context, "Connexion réussie !!"+result.annonces[0].title, Toast.LENGTH_SHORT).show()
-                    println(result.annonces)
+
+                    /*val Datagson = result.annonces.toString()
+                    println("ICIIIIIIII"+Datagson)
+                    val Gson = Gson()
+                    val Type = object:TypeToken<ArrayList<Annonces>>() {}.type
+                    val Data: ArrayList<Annonces> = Gson.fromJson(Datagson, Type)
+                    println("LAAAAAAAA"+Data)*/
                     //val indice = 1
-                    result.annonces.forEach {
+                    //result.annonces.forEach {
 
                         //val annonce1 = Annonces(it.title, it.category, it.type, it.description, it.photos)
                        /* annoncesTest.elementAt(indice).titre = it.title
@@ -112,7 +124,7 @@ class HomeFragment(
                         annoncesTest.elementAt(indice).description = it.description
                         annoncesTest.elementAt(indice).urlImage = it.photos*/
                         //myList.add(annonce1)
-                    }
+                    //}
                     list_recycler_view.apply {
                         // set a LinearLayoutManager to handle Android
                         // RecyclerView behavior

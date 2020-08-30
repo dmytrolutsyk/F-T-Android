@@ -25,14 +25,14 @@ interface ApiInterface {
     fun getannonces(@Header("x-access-token") token: String): retrofit2.Call<GetAnnoncesResult>
 
     @Headers("Content-Type:application/json")
-    @PATCH("/users/:id")
+    @PATCH("/users/5f4a96509906490017cec845")
     fun patchuser(@Header("x-access-token") token: String, @Body info: PatchUser): retrofit2.Call<PatchUserResult>
 
 }
 class RetrofitInstance {
     companion object {
         //val BASE_URL: String = "https://findandtrade.herokuapp.com/"
-        val BASE_URL: String = "http://192.168.4.30:3000/"
+        val BASE_URL: String = "http://192.168.43.174:3000/"
 
         val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
             this.level = HttpLoggingInterceptor.Level.BODY
@@ -62,8 +62,8 @@ data class SignUpBody(val username: String, val password: String)
 data class SignUpResult(val createdId: String, val error: String, val token: String)
 data class PutAnnonce(val title: String, val description: String, val category: String, val type: String, val photos: String)
 data class PutAnnonceResult(val error: String, val annonce: Annonce)
-data class GetAnnonces(val _id: String, val userID: String, val title: String, val category: String, val description: String, val type: String, val photos: String, val createdAt: String, val lastUpdatedAt: String)
-data class GetAnnoncesResult(val error: String, val annonces : Array<GetAnnonces> )
+data class GetAnnonces(val _id: String, val userID: String, val title: String, val category: String, val description: String, val type: String, val photos: String, val createdAt: String, val lastUpdatedAt: String, val username: String)
+data class GetAnnoncesResult(val error: String, val annonces : Array<Annonce> )
 data class PatchUser (val username: String, val password: String, val ville: String, val email: String, val status_user: String, val phone: String)
 data class PatchUserResult(val error: String, val user: User)
 
