@@ -13,6 +13,10 @@ interface ApiInterface {
     fun signin(@Body info: SignInBody): retrofit2.Call<SignInResult>
 
     @Headers("Content-Type:application/json")
+    @POST("signup")
+    fun signup(@Body info: SignUpBody): retrofit2.Call<SignUpResult>
+
+    @Headers("Content-Type:application/json")
     @PUT("annonces")
     fun putannonce(@Header("x-access-token") token: String, @Body info: PutAnnonce): retrofit2.Call<PutAnnonceResult>
 
@@ -36,9 +40,9 @@ class RetrofitInstance {
 
         val client: OkHttpClient = OkHttpClient.Builder().apply {
             this.addInterceptor(interceptor)
-            this.connectTimeout(30, TimeUnit.SECONDS)
-            this.writeTimeout(30, TimeUnit.SECONDS)
-            this.readTimeout(30, TimeUnit.SECONDS)
+            //this.connectTimeout(30, TimeUnit.SECONDS)
+            //this.writeTimeout(30, TimeUnit.SECONDS)
+            //this.readTimeout(30, TimeUnit.SECONDS)
         }.build()
         fun getRetrofitInstance(): Retrofit {
             val builder = Retrofit.Builder()
@@ -54,6 +58,8 @@ class RetrofitInstance {
 
 data class SignInBody(val username: String, val password: String)
 data class SignInResult(val error: String, val UserId: String, val token: String)
+data class SignUpBody(val username: String, val password: String)
+data class SignUpResult(val createdId: String, val error: String, val token: String)
 data class PutAnnonce(val title: String, val description: String, val category: String, val type: String, val photos: String)
 data class PutAnnonceResult(val error: String, val annonce: Annonce)
 data class GetAnnonces(val _id: String, val userID: String, val title: String, val category: String, val description: String, val type: String, val photos: String, val createdAt: String, val lastUpdatedAt: String)

@@ -13,9 +13,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.ft_android.BottomNavigationActivity
 import com.example.ft_android.R
+import kotlinx.android.synthetic.main.fragment_new_add.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
+class categorie (val categorie: String)
 
 class NewAdFragment : Fragment() {
     private lateinit var NewadViewModel: AdViewModel
@@ -24,6 +27,7 @@ class NewAdFragment : Fragment() {
     private lateinit var category: TextView
     private lateinit var photos: TextView
     private lateinit var type: TextView
+    private lateinit var spinner: Spinner
     lateinit var putannonce_button: Button
     private var token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWIwM2IxZGIzNWJkMzcxYmM2NDQxN2IiLCJ1c2VybmFtZSI6ImJlcm5hcmQiLCJwYXNzd29yZCI6IiQyYiQwNSQ1NXk4WmNtVDJobVNpSFpuSFNxelguM2kyZTRlYjVWS3RNUHd4aWpwZlo2RjJjQXkzUTJHMiIsImlhdCI6MTU5ODcxMTIyOSwiZXhwIjoxNTk4Nzk3NjI5fQ.G-nsNOvthr-luLwGaGHF9oEPXFdCcvLBCGBKDU8DA-8"
 
@@ -34,8 +38,8 @@ class NewAdFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val type = resources.getStringArray(R.array.Type)
-        /*val spinner = activity.findViewById(R.id.spinner).setOnClickListener(this);
+        /*val type = resources.getStringArray(R.array.Type)
+        this.spinner = root.findViewById(R.id.spinner)
         if (spinner != null) {
             val adapter = ArrayAdapter(this,
                 android.R.layout.simple_spinner_item, type)
@@ -43,17 +47,13 @@ class NewAdFragment : Fragment() {
         NewadViewModel =
                 ViewModelProviders.of(this).get(AdViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_new_add, container, false)
-        //val textView: TextView = root.findViewById(R.id.text_newAdd)
-        //NewadViewModel.text.observe(viewLifecycleOwner, Observer {
-        //    textView.text = it
-        //})
-        //this.TextView =  root!!.findViewById(R.id.textView7)
-        //this.TextView.text = "salut"
         //this.token = arguments!!.getString("token").toString()
 
-
-        //var title: String = "velo"
-
+        val typeofobject = resources.getStringArray(R.array.Type)
+        spinner = root.findViewById(R.id.spinner)
+        val categorie = arrayListOf<String>("Electromenager", "Vehicules", "Jardinage")
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.fragment_new_add, categorie);
+        //this.spinner.adapter = adapter
 
 
         this.putannonce_button = root!!.findViewById(R.id.button2)
