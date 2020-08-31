@@ -11,12 +11,14 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.example.ft_android.MainActivity
 import com.example.ft_android.BottomNavigationActivity
 import com.example.ft_android.R
 import kotlinx.android.synthetic.main.fragment_new_add.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class categorie (val categorie: String)
 
@@ -29,8 +31,7 @@ class NewAdFragment : Fragment() {
     private lateinit var type: TextView
     private lateinit var spinner: Spinner
     lateinit var putannonce_button: Button
-    private var token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWIwM2IxZGIzNWJkMzcxYmM2NDQxN2IiLCJ1c2VybmFtZSI6ImJlcm5hcmQiLCJwYXNzd29yZCI6IiQyYiQwNSQ1NXk4WmNtVDJobVNpSFpuSFNxelguM2kyZTRlYjVWS3RNUHd4aWpwZlo2RjJjQXkzUTJHMiIsImlhdCI6MTU5ODcxMTIyOSwiZXhwIjoxNTk4Nzk3NjI5fQ.G-nsNOvthr-luLwGaGHF9oEPXFdCcvLBCGBKDU8DA-8"
-
+    private var token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWNjNzI1MzdiODA4MzAwMTdjY2M4OTQiLCJ1c2VybmFtZSI6ImlwYWQiLCJwYXNzd29yZCI6IiQyYiQwNSQ4emFKUTJDbzFtNFRoR3MwZDRxTWN1YnI2bk9zYkpzYXk4QXFmZUllS1FNSGdMNjhHTHlZaSIsImlhdCI6MTU5ODg4NTAzMCwiZXhwIjoxNTk4OTcxNDMwfQ.0SqUHxgO-UwMMV02ploaJpRXKb1i_B7oO0xPYFXZAfE"
 
 
     override fun onCreateView(
@@ -38,12 +39,7 @@ class NewAdFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        /*val type = resources.getStringArray(R.array.Type)
-        this.spinner = root.findViewById(R.id.spinner)
-        if (spinner != null) {
-            val adapter = ArrayAdapter(this,
-                android.R.layout.simple_spinner_item, type)
-            spinner.adapter = adapter*/
+
         NewadViewModel =
                 ViewModelProviders.of(this).get(AdViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_new_add, container, false)
@@ -52,8 +48,7 @@ class NewAdFragment : Fragment() {
         val typeofobject = resources.getStringArray(R.array.Type)
         spinner = root.findViewById(R.id.spinner)
         val categorie = arrayListOf<String>("Electromenager", "Vehicules", "Jardinage")
-        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.fragment_new_add, categorie);
-        //this.spinner.adapter = adapter
+
 
 
         this.putannonce_button = root!!.findViewById(R.id.button2)
@@ -77,7 +72,9 @@ class NewAdFragment : Fragment() {
             this.type = root!!.findViewById(R.id.type)
             var typeobj: String = this.type.text.toString()
             //var typeobj: String = "don"
-            println("ici "+title)
+            var mainA = MainActivity()
+
+
             putannonce(title, description,
                 category, photos, typeobj
             )
@@ -102,7 +99,7 @@ class NewAdFragment : Fragment() {
             override fun onResponse(call: Call<PutAnnonceResult>, response: Response<PutAnnonceResult>) {
                 if (response.code() == 200) {
                     val result: PutAnnonceResult = response.body()!!
-                    Toast.makeText(view!!.context, "Connexion réussie !!"+result.annonce, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(view!!.context, "Annonce publiée", Toast.LENGTH_SHORT).show()
                     val intent = Intent(view!!.context, BottomNavigationActivity::class.java)
                     startActivity(intent)
                 } else {

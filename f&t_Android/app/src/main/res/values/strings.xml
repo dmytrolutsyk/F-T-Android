@@ -22,7 +22,7 @@
     <string name="mettre_jour">Mettre à Jour</string>
     <string name="email">Email</string>
     <string name="titre">Titre</string>
-    <string name="categorie">Categorie</string>
+    <string name="description">Description</string>
     <string-array name="Type">
         <item>Animaux</item>
         <item>Bricolage</item>

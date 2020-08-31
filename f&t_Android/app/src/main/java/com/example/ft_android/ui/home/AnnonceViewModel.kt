@@ -15,12 +15,12 @@ class AnnonceViewModel (inflater: LayoutInflater, parent: ViewGroup) :
 
     init {
         mTitleView = itemView.findViewById(R.id.list_title)
-        mYearView = itemView.findViewById(R.id.list_categorie)
+        mYearView = itemView.findViewById(R.id.list_description)
     }
 
     fun bind(annonces: Annonce) {
         mTitleView?.text = annonces.title
-        mYearView?.text = annonces.category
+        mYearView?.text = annonces.description
     }
 }
 

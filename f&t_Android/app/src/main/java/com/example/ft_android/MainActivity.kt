@@ -14,14 +14,17 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ft_android.ui.home.HomeFragment
+import com.example.ft_android.ui.new_ad.NewAdFragment
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity() {
+public class MainActivity : AppCompatActivity() {
 
-    private lateinit var ValidateBtn: Button
+    public lateinit var ValidateBtn: Button
+    public var loginUser: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -46,7 +49,12 @@ class MainActivity : AppCompatActivity() {
                 toast.show()
             }
             else {
+                loginUser = Usernamecpt
+
+
                 signin(Usernamecpt, Passwordcpt)
+
+
             }
         }
 
@@ -58,7 +66,6 @@ class MainActivity : AppCompatActivity() {
             var Password = findViewById<View>(R.id.PasswordField) as EditText
             val Passwordcpt = Password.text.toString()
 
-            //val intent = Intent(this, Homepage::class.java)
             val intent = Intent(this, BottomNavigationActivity::class.java)
             intent.putExtra("Username", Usernamecpt)
             intent.putExtra("Password", Passwordcpt)
@@ -70,7 +77,10 @@ class MainActivity : AppCompatActivity() {
                 toast.show()
             }
             else {
+                var newad = NewAdFragment()
+                loginUser = Usernamecpt
                 signup(Usernamecpt, Passwordcpt)
+
             }
         }
     }
@@ -79,18 +89,19 @@ class MainActivity : AppCompatActivity() {
         val signIn = SignInBody(username , password)
         retIn.signin(signIn).enqueue(object : Callback<SignInResult> {
             override fun onFailure(call: Call<SignInResult>, t: Throwable) {
-                println(t.message)
-                Toast.makeText(applicationContext, "Error: Voir les logs!!!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Erreur voir logs", Toast.LENGTH_SHORT).show()
             }
             override fun onResponse(call: Call<SignInResult>, response: Response<SignInResult>) {
                 if (response.code() == 200) {
                     val result: SignInResult = response.body()!!
-                    Toast.makeText(applicationContext, "Connexion réussie !!"+result.token, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Connexion réussie", Toast.LENGTH_SHORT).show()
                     val intent = Intent(applicationContext, BottomNavigationActivity::class.java)
+                 //   intent.putExtra("token", result.token)
                     intent.putExtra("token", result.token)
+                    intent.putExtra("loginUser", loginUser)
                     startActivity(intent)
                 } else {
-                    Toast.makeText(applicationContext, "Connexion échoué!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Erreur de connexion: vérifiez vos identifiants", Toast.LENGTH_SHORT).show()
                 }
             }
         })
@@ -101,7 +112,6 @@ class MainActivity : AppCompatActivity() {
         val signUp = SignUpBody(username , password)
         retIn.signup(signUp).enqueue(object : Callback<SignUpResult> {
             override fun onFailure(call: Call<SignUpResult>, t: Throwable) {
-                println(t.message)
                 Toast.makeText(applicationContext, "Error: Voir les logs!!!", Toast.LENGTH_SHORT).show()
             }
             override fun onResponse(call: Call<SignUpResult>, response: Response<SignUpResult>) {

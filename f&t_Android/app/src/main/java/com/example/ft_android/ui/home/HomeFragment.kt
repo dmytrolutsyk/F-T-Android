@@ -95,43 +95,23 @@ class HomeFragment(
         val retIn = RetrofitInstance.getRetrofitInstance().create(ApiInterface::class.java)
         retIn.getannonces(this.token).enqueue(object : Callback<GetAnnoncesResult> {
             override fun onFailure(call: Call<GetAnnoncesResult>, t: Throwable) {
-                println(t.message)
+
                 Toast.makeText(view!!.context, "Error: Voir les logs!!!", Toast.LENGTH_SHORT).show()
             }
             override fun onResponse(call: Call<GetAnnoncesResult>, response: Response<GetAnnoncesResult>) {
                 if (response.code() == 200) {
                     val result: GetAnnoncesResult = response.body()!!
-                    Toast.makeText(view!!.context, "Connexion réussie !!"+result.annonces[0].title, Toast.LENGTH_SHORT).show()
-                    println("ICIIIIIII"+result.annonces[0].title)
 
-                    /*val Datagson = result.annonces.toString()
-                    println("ICIIIIIIII"+Datagson)
-                    val Gson = Gson()
-                    val Type = object:TypeToken<ArrayList<Annonces>>() {}.type
-                    val Data: ArrayList<Annonces> = Gson.fromJson(Datagson, Type)
-                    println("LAAAAAAAA"+Data)*/
-                    //val indice = 1
                     var annoncedata: ArrayList<Annonce> = ArrayList<Annonce>()
-                    println(result.annonces.size)
                     result.annonces.forEach {
                         var annonce: Annonce = Annonce(it.userID, it.title, it.description, it.category, it.type, it.photos, it.createdAt, it._id, it.username)
                         annoncedata.add(annonce)
 
-                        //val annonce1 = Annonces(it.title, it.category, it.type, it.description, it.photos)
-                       /* annoncesTest.elementAt(indice).titre = it.title
-                        annoncesTest.elementAt(indice).categorie = it.category
-                        annoncesTest.elementAt(indice).type = it.type
-                        annoncesTest.elementAt(indice).description = it.description
-                        annoncesTest.elementAt(indice).urlImage = it.photos*/
-                        //myList.add(annonce1)
                     }
-                    println("LAAAA"+annoncedata)
                     list_recycler_view.apply {
-                        // set a LinearLayoutManager to handle Android
-                        // RecyclerView behavior
+
                         layoutManager = LinearLayoutManager(activity)
-                        // set the custom adapter to the RecyclerView
-                        //adapter = ListAdapter(myList)
+
                         adapter = ListAdapter(annoncedata)
 
                     }
