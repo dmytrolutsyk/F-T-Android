@@ -76,6 +76,8 @@ class NewAdFragment : Fragment() {
         }
 
 
+
+
         this.putannonce_button = root!!.findViewById(R.id.button2)
         this.putannonce_button.setOnClickListener {
             this.title = root!!.findViewById(R.id.title)
@@ -85,8 +87,9 @@ class NewAdFragment : Fragment() {
             var description: String = this.description.text.toString()
             //var description: String = "il est rouillé"
 
-            this.category = root!!.findViewById(R.id.category)
-            var category: String = this.category.text.toString()
+            //this.category = root!!.findViewById(R.id.category)
+            //var category: String = this.category.text.toString()
+            val category = spinner.getSelectedItem().toString()
             //var category: String = "sport"
 
 
@@ -94,11 +97,13 @@ class NewAdFragment : Fragment() {
             var photos: String = this.photos.text.toString()
             //var photos: String = "blablou"
 
-            this.type = root!!.findViewById(R.id.type)
-            var typeobj: String = this.type.text.toString()
+            //this.type = root!!.findViewById(R.id.type)
+            //var typeobj: String = this.type.text.toString()
+            val typeobj = spinner2.getSelectedItem().toString()
             //var typeobj: String = "don"
             var mainA = MainActivity()
 
+            println("Lites déroualtes: type : "+typeobj+" categorie : "+category)
 
             putannonce(title, description,
                 category, photos, typeobj
