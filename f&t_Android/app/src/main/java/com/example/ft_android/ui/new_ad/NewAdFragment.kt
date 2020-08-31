@@ -46,9 +46,34 @@ class NewAdFragment : Fragment() {
         //this.token = arguments!!.getString("token").toString()
 
         val typeofobject = resources.getStringArray(R.array.Type)
-        spinner = root.findViewById(R.id.spinner)
-        val categorie = arrayListOf<String>("Electromenager", "Vehicules", "Jardinage")
+        val typeofad = resources.getStringArray(R.array.type_annonce)
+        val spinner: Spinner = root.findViewById(R.id.spinner)
+        val spinner2: Spinner = root.findViewById(R.id.spinner2)
+        activity?.getBaseContext()?.let {
+            ArrayAdapter.createFromResource(
+                it,
+                R.array.Type,
+                android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                // Specify the layout to use when the list of choices appears
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                // Apply the adapter to the spinner
+                spinner.adapter = adapter
+            }
+        }
 
+        activity?.getBaseContext()?.let {
+            ArrayAdapter.createFromResource(
+                it,
+                R.array.type_annonce,
+                android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                // Specify the layout to use when the list of choices appears
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                // Apply the adapter to the spinner
+                spinner2.adapter = adapter
+            }
+        }
 
 
         this.putannonce_button = root!!.findViewById(R.id.button2)

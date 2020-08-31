@@ -37,4 +37,8 @@
         <item>Véhicules</item>
         <item>Vêtements</item>
     </string-array>
+    <string-array name="type_annonce">
+        <item>Don</item>
+        <item>Echange</item>
+    </string-array>
 </resources>

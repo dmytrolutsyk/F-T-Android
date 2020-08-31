@@ -101,6 +101,7 @@ class HomeFragment(
             override fun onResponse(call: Call<GetAnnoncesResult>, response: Response<GetAnnoncesResult>) {
                 if (response.code() == 200) {
                     val result: GetAnnoncesResult = response.body()!!
+                    Toast.makeText(view!!.context, "Annonces récupérées", Toast.LENGTH_SHORT).show()
 
                     var annoncedata: ArrayList<Annonce> = ArrayList<Annonce>()
                     result.annonces.forEach {
