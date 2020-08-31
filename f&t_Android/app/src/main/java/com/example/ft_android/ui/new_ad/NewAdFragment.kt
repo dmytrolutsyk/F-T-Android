@@ -100,13 +100,14 @@ class NewAdFragment : Fragment() {
             //this.type = root!!.findViewById(R.id.type)
             //var typeobj: String = this.type.text.toString()
             val typeobj = spinner2.getSelectedItem().toString()
+            val username: String = "dmytro"
             //var typeobj: String = "don"
             var mainA = MainActivity()
 
             println("Lites déroualtes: type : "+typeobj+" categorie : "+category)
 
             putannonce(title, description,
-                category, typeobj, photos
+                category, typeobj, photos, username
             )
         }
         return root
@@ -118,9 +119,9 @@ class NewAdFragment : Fragment() {
     }
 
 
-    private fun putannonce(nom_objet: String, descriptionon: String, categorie: String, photo: String, typeobj: String){
+    private fun putannonce(nom_objet: String, descriptionon: String, categorie: String, photo: String, typeobj: String, username: String){
         val retIn = RetrofitInstance.getRetrofitInstance().create(ApiInterface::class.java)
-        val putad = PutAnnonce(nom_objet , descriptionon, categorie, photo, typeobj)
+        val putad = PutAnnonce(nom_objet , descriptionon, categorie, photo, typeobj, username)
         retIn.putannonce(this.token, putad).enqueue(object : Callback<PutAnnonceResult> {
             override fun onFailure(call: Call<PutAnnonceResult>, t: Throwable) {
                 println(t.message)
