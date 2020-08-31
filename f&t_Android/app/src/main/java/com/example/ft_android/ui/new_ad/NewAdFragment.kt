@@ -106,7 +106,7 @@ class NewAdFragment : Fragment() {
             println("Lites déroualtes: type : "+typeobj+" categorie : "+category)
 
             putannonce(title, description,
-                category, photos, typeobj
+                category, typeobj, photos
             )
         }
         return root
